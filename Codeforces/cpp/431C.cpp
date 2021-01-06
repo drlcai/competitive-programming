@@ -61,7 +61,9 @@ typedef multiset<int> MSETI;
 typedef long int int32;
 typedef unsigned long int uint32;
 typedef long long int int64;
-typedef unsigned long long int uint64;
+typedef unsigned long long int  uint64;
+
+
 
 
 /********** Main()  function **********/
@@ -69,20 +71,70 @@ void solve() {
 
 }
 
-int main()
-{
+int main(){
+  int n, k, d;
+  cin >> n >> k >> d;
+  
+  VI table(n + 1);
+  VI tablewithlow(n + 1);
+  
+  int sum = 0;
+  // init table
+  
+  // from 1 to k
+  FOR(i, 1, min(n + 1 , k + 1), 1){
+    table[i] = (sum + 1) % MOD;
+    sum += table[i];
+    sum %= MOD;
+  }
+  
+  // from k + 1 to n
+  // if n <= k, then this won't go
+  FOR(i, k + 1, n + 1, 1){
+    FOR(j, 1, k+1, 1){
+      table[i] += table[i - j];
+      table[i] %= MOD;
+    }
+  }
+  
+  // compute table with low
+  // from 1 to d - 1 are all 0
+  // from d onwards to k, remember to + 1
+  FOR(i, d, min(n + 1, k + 1), 1){
+    // from i - 1 to i - d + 1, 
+    FOR(j, i - d + 1, i, 1){
+      tablewithlow[i] += tablewithlow[j];
+      tablewithlow[i] %= MOD;
+    }
+    FOR(j, 0, i - d + 1, 1){
+      tablewithlow[i] += table[j];
+      tablewithlow[i] %= MOD;
+    }
+    tablewithlow[i] += 1;
+  }
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-	int tc;
-	tc = read(int);
-
-	while(tc--){
-		write(tc);
-	}
-	return 0;
+  FOR(i, k + 1, n + 1, 1){
+    FOR(j, 1, k+1, 1){
+      if(j < d){
+        tablewithlow[i] += tablewithlow[i - j];
+        tablewithlow[i] %= MOD;
+      }
+      else{
+        tablewithlow[i] += table[i - j];
+        tablewithlow[i] %= MOD;
+      }
+    }
+  }
+  
+  cout << tablewithlow[n];
+  
+  // cout << "answer: " << tablewithlow[n] << endl;
+  
+  // FOR(i, 0, n+1, 1){
+  //   cout << table[i] << endl;
+  // }
+  // FOR(i, 0, n+1, 1){
+  //   cout << tablewithlow[i] << endl;
+  // }
 }
 /********  Main() Ends Here *************/
