@@ -1,4 +1,4 @@
-Difficulty: 1600
+Difficulty: 1600, Time: 1hour.
 
 This problem can be solved by dinamic programming.
 
@@ -57,10 +57,10 @@ int main(int argc, char ** argv)
 {
     int n, k, d;
     cin >> n >> k >> d;
-    dp[0][0] = 1;
+    dp[0][0] = 1; // This is for the first k slots, we can simply use a single edge with weight k.
     dp[0][1] = 0;
     
-    for(int i = 1 ; i <= n ; ++i)
+    for(int i = 1 ; i <= n ; ++i) // Notice the benefit of using = here.
     {
         dp[i][0] = dp[i][1] = 0;
         
