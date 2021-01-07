@@ -1,6 +1,11 @@
-Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.
+Difficulty: Hard. Time: 15min
 
- 
+As a well-known problem, this is not so hard to code this problem, though I spent some time on thinking about the indices.
+I should be able to solve them faster than 10min. 
+
+======
+
+Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining. 
 
 **Example 1:**
 
