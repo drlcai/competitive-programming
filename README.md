@@ -2,7 +2,7 @@
 
 Leetcode (I've done more than 200 Leetcode problems, but since most of them are on the website I would slowly update it here when available.)
 
-- [ ] Hard: 1/50
+- [ ] Hard: 2/50
 - [ ] Medium: 0/100
 - [ ] Easy: 0/100
 
