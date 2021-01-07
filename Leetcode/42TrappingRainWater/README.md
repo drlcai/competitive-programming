@@ -3,6 +3,11 @@ Difficulty: Hard. Time: 15min
 As a well-known problem, this is not so hard to code this problem, though I spent some time on thinking about the indices.
 I should be able to solve them faster than 10min. 
 
+The idea is simple, for a slot to store rain drops, we need to check the highest bar from the left and the highest bar from the right.
+Then we use the min of them to subtract the height at the slot. Note that for the two end they don't store anyway.
+
+The edge cases are when len(height) <= 2. Other than that we can always solve the problem without worring about anything. 
+
 ======
 
 Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining. 
