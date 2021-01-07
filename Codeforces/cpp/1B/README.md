@@ -1,4 +1,4 @@
-Difficulty 1600.
+Difficulty 1600. Time: 1hour.
 
 This took me an hour to implement, which should not be the case. The problem is easy to understand and a bit complicated to implement.
 
