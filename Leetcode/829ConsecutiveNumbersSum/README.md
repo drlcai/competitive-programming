@@ -1,3 +1,11 @@
+Difficulty: Hard. Time: 11min
+
+This problem is easier than I thought. The key is to notice that there are some patterns of the sum of consecutive numbers.
+
+The time complexity is O(sqrt(N)) because when the sum of first i numbers are greater we stop creating the table. 
+
+======
+
 Given a positive integer `N`, how many ways can we write it as a sum of consecutive positive integers?
 
 **Example 1:**
