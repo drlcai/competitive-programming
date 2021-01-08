@@ -51,8 +51,8 @@ using namespace std;
 #define read(type) readInt<type>()
 const double pi=acos(-1.0);
 typedef pair<int, int> PII;
+typedef pair<string, string> PSS;
 typedef vector<int> VI;
-typedef vector<bool> VB;
 typedef vector<string> VS;
 typedef vector<PII> VII;
 typedef vector<VI> VVI;
@@ -65,26 +65,49 @@ typedef long long int int64;
 typedef unsigned long long int uint64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
-
 /********** Main()  function **********/
-void solve() {
 
+string solve(int n){
+  if (n == 1){
+    return "9";
+  }
+  
+  bool dec = true;
+
+  int digit = 9;
+  string res = "";
+  
+  while (n --> 0){
+    res += ('0' + digit);
+    if (dec){
+      if (digit == 8){
+        dec = false;
+        digit = 9;
+      }else{
+        digit --;
+      }
+    }else{
+      digit = (digit + 1) % 10;
+    }
+    
+  }
+  return res;
+  
 }
+
 
 int main()
 {
-
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-	int tc;
-	tc = read(int);
-
-	while(tc--){
-		write(tc);
-	}
-	return 0;
+  int tc;
+  SCD(tc);
+  
+	while (tc --> 0){
+    int n;
+    cin >> n;
+    string res = solve(n);
+    cout << res << endl;
+  }
+  
+	
 }
 /********  Main() Ends Here *************/

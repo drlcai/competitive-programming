@@ -51,6 +51,7 @@ using namespace std;
 #define read(type) readInt<type>()
 const double pi=acos(-1.0);
 typedef pair<int, int> PII;
+typedef pair<string, string> PSS;
 typedef vector<int> VI;
 typedef vector<bool> VB;
 typedef vector<string> VS;
@@ -65,26 +66,110 @@ typedef long long int int64;
 typedef unsigned long long int uint64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
-
 /********** Main()  function **********/
-void solve() {
 
+int solve(int n){
+  if(n <= 2){
+    while(n --> 0){
+      int x;
+      cin >> x;
+    }
+    return 0;
+  }
+  
+  VI table(n);
+  VI yn(n);
+  FOR(i, 0, n, 1){
+    cin >> table[i];
+    //cout << table[i];
+  }
+  
+  int all = 0;
+  FOR(i, 1, n-1, 1){
+    if (table[i] > table[i-1] && table[i] > table[i+1]){
+      yn[i] = 1;
+      all ++;
+    }else if(table[i] < table[i-1] && table[i] < table[i+1]){
+      yn[i] = -1;
+      all ++;
+    }
+  }
+  
+  if (all == 0)
+    return 0;
+  
+  int dec = 0;
+  
+  FOR(i, 1, n-1, 1){
+    
+    if(yn[i] == 0)
+      continue;
+    
+    int check = abs(yn[i-1]) + abs(yn[i+1]);
+    
+    if(check == 0)
+      dec = max(1, dec);
+    else if(check == 2){
+      dec = max(3, dec);
+    }else{ // check == 1
+      int y, nt;
+      if(yn[i-1] != 0){ // YYN
+        y = table[i-1];
+        nt = table[i+1];
+        
+        if(yn[i] == 1){ // hill
+          if( y < nt && i + 2 < n && table[i + 1] != table[i + 2]){
+            dec = max(1, dec);
+          }else{
+            dec = max(2, dec);
+          }
+        }else{
+          if ( y > nt && i + 2 < n && table[i + 1] != table[i + 2]){
+            dec = max(1, dec);
+          }else{
+            dec = max(2, dec);
+          }
+        }
+      }else{ // NYY
+        y = table[i + 1];
+        nt = table[i - 1];
+        
+        if(yn[i] == 1){
+          if (y < nt && i - 2 >= 0 && table[i - 1] != table[i - 2]){
+            dec = max(1, dec);
+          }else{
+            dec = max(2, dec);
+          }
+        }else{
+          if ( y > nt && i - 2 >= 0 && table[i - 1] != table[i - 2]){
+            dec = max(1, dec);
+          }else{
+            dec = max(2, dec);
+          }
+        }
+      }
+      
+    }
+  }
+  
+  return all - dec;
+  
+  
 }
+
 
 int main()
 {
-
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-	int tc;
-	tc = read(int);
-
-	while(tc--){
-		write(tc);
-	}
-	return 0;
+  int tc;
+  SCD(tc);
+  
+	while (tc --> 0){
+    int n;
+    cin >> n;
+    int res = solve(n);
+    cout << res << endl;
+  }
+  
+	
 }
 /********  Main() Ends Here *************/
