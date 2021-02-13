@@ -14,3 +14,7 @@ an n = 1, or n = 2.
 **I SHOULD NOT MAKE THE SAME MISTAKE IN A CONTEST AGAIN.**
 
 If I do not make such stupid mistake, this round I should be able to get 1600+. 
+
+
+
+
