@@ -82,3 +82,6 @@ Now, we have to minimise either of the two cases, which is the solution to the p
 For the first case, we can choose the two smallest numbers such that they both appear in different bags to be at odd depth.
 
 For the second case, we can choose all numbers from the bag where the sum of the numbers is minimum to be at odd depth.
+
+
+
