@@ -73,30 +73,37 @@ typedef unsigned long long int uint64;
 
 /********** Main()  function **********/
 void solve() {
-
+  string s;
+  cin >> s;
+  
+  string res = "";
+  FOR(i, 0, s.size(), 1){
+    if(i % 2 == 0){
+      // small
+      if (s[i] == 'a'){
+        res = res + "b";
+      }else{
+        res = res + "a";
+      }
+    }else{
+      // large
+      if (s[i] == 'z'){
+        res = res + "y";
+      }else
+        res = res + "z";
+    }
+  }
+  
+  cout << res << endl;
 }
 
 int main()
 {
-
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-
 	int tc;
   SCD(tc);
   
 	while (tc --> 0){
     solve();
   }
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
-	return 0;
 }
 /********  Main() Ends Here *************/

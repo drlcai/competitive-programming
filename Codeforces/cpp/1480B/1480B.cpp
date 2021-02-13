@@ -68,21 +68,79 @@ typedef long int int32;
 typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int uint64;
+typedef pair<int64, int64> PII64;
+typedef vector<int64> VI64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
 
 /********** Main()  function **********/
 void solve() {
-
+  int64 A, B, n;
+  cin >> A >> B >> n;
+  
+  VI64 a,b;
+  FOR(i, 0, n, 1){
+    int64 x;
+    cin >> x;
+    
+    a.push_back(x);
+  }
+  
+  FOR(i, 0, n, 1){
+    int64 y;
+    cin >> y;
+    b.push_back(y);
+  }
+  
+  priority_queue<PII64, vector<PII64>, greater<PII64> > pq;
+  
+  FOR(i, 0, n, 1){
+    int64 natt = b[i] / A + (b[i] % A != 0);
+    //watch(natt);
+    int64 dmg = natt * a[i];
+    
+    pq.push(make_pair( (int64)a[i], dmg));
+  }
+  
+  int kill = 0;
+  while (!pq.empty()){
+      //cout << pq.top().first << " ";
+      PII64 monster = pq.top();
+      watch(monster.first);
+      watch(monster.second);
+      pq.pop();
+      if(B > monster.second){
+        kill ++;
+        B -= monster.second;
+        //watch(B);
+      }else{
+        if(B > monster.second - monster.first)
+          kill ++;
+        
+        //watch(B);
+        break;
+      }
+      
+  }
+  
+  if(kill >= n){
+    cout << "YES" << endl;
+  }else{
+    cout << "NO" << endl;
+  }
+  
+  
+  
+    
 }
 
 int main()
 {
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// //freopen("output.txt","w",stdout);
+	// #endif
 
 
 	int tc;

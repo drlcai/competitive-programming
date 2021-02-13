@@ -70,33 +70,96 @@ typedef long long int int64;
 typedef unsigned long long int uint64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
-
 /********** Main()  function **********/
-void solve() {
 
+void solve(){
+  int n, m;
+  
+  cin >> n >> m;
+  
+  VI A, B, C;
+  
+  FOR(i, 0, n, 1){
+    int a;
+    cin >> a;
+    A.push_back(a);
+  }
+  
+  map<int, VI> table;
+  
+  FOR(i, 0, n, 1){
+    int b;
+    cin >> b;
+    B.push_back(b);
+    
+    if (B[i] != A[i]){
+      auto it = table.find(B[i]);
+      if (it != table.end()){
+        table[B[i]].push_back(i);
+      }else{
+        VI vec;
+        vec.push_back(i);
+        table[B[i]] = vec;
+      }
+    }
+    
+    
+  }
+  
+  FOR(i, 0, m, 1){
+    int c;
+    cin >> c;
+    C.push_back(c);
+  }
+  
+  int cm = C[m-1];
+  int x = -1;
+  
+  if (table.find(cm) != table.end()){
+    x = table.find(cm)->second.back();
+    table.find(cm)->second.pop_back();
+  }else{
+    FOR(i, 0, n, 1){
+      if(B[i] == cm){
+        x = i;
+        break;
+      }
+    }
+  }
+  
+  if(x == -1){
+    puts("NO");
+    return;
+  }
+  
+  // if the last painter has a plank to paint
+  VI ans(m);
+  
+  ans[m-1] = x;
+  
+  FOR(i, 0, m-1, 1){
+    if(table.find())
+    
+		if((int)g[c[i]].size() == 0){
+		 	ans[i] = last;
+		}
+		else{
+			ans[i] = g[c[i]].back();
+			g[c[i]].pop_back();
+		}
+	}
+  
 }
 
 int main()
 {
-
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-
-	int tc;
+  int tc;
   SCD(tc);
   
 	while (tc --> 0){
     solve();
   }
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
-	return 0;
+  
+	
 }
 /********  Main() Ends Here *************/

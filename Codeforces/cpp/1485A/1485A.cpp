@@ -72,18 +72,63 @@ typedef unsigned long long int uint64;
 #define watch(x) cout << (#x) << " is " << (x) << endl;
 
 /********** Main()  function **********/
-void solve() {
 
+int help2(int a, int b){
+  int res = 0;
+  while(a > 0){
+    a = a/b;
+    res ++;
+  }
+  return res;
+}
+
+int help(int a, int b){
+  if (a < b)
+    return 1;
+  
+  if (a == b){
+    return 2;
+  }
+  
+  if (b == 1){
+    return 1 + help(a, 2);
+  }
+  
+  int l = help2(a, b);
+  //watch(l);
+  
+  int res = l;
+  
+  FOR(i, 1, 30, 1){
+    int temp = i + help2(a, b+i);
+    
+    if (temp < res){
+      res = temp;
+    }
+    
+    //watch(res);
+  }
+  
+  return res;
+  
+}
+
+void solve() {
+  int a,b;
+  cin >> a >> b;
+  int res = help(a,b);
+  
+  cout << res << endl;
+  cout.flush();
 }
 
 int main()
 {
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// //freopen("output.txt","w",stdout);
+	// #endif
 
 	int tc;
   SCD(tc);

@@ -44,17 +44,12 @@ using namespace std;
 #define IN(A, B, C) assert( B <= A && A <= C)
 #define MP make_pair
 #define PB push_back
-
 #define INF (int)1e9
 #define EPS 1e-9
 #define PI 3.1415926535897932384626433832795
 #define MOD 1000000007
-#define OOO 1000000010
-const double pi = acos(-1.0);
-
-
 #define read(type) readInt<type>()
-
+const double pi=acos(-1.0);
 typedef pair<int, int> PII;
 typedef pair<string, string> PSS;
 typedef vector<int> VI;
@@ -70,33 +65,76 @@ typedef long long int int64;
 typedef unsigned long long int uint64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
-
 /********** Main()  function **********/
-void solve() {
 
+void solve(){
+  int n, k;
+  
+  cin >> n >> k;
+  
+  VI list;
+  
+  FOR(i, 0, n, 1){
+    int h;
+    cin >> h;
+    list.push_back(h);
+  }
+  
+  // watch(n);
+  // watch(k);
+  // cout << "watch list: ";
+  // FOR(i, 0, n, 1){
+  //   cout << list[i] << " ";
+  // }
+  // cout << endl;
+  
+  // simulation
+  while (true){
+    // for one ball    
+    int ptr = 0;
+    
+    while(ptr < n - 1){
+      if(list[ptr] >= list[ptr+1]){
+        // if the ball can go, then go forward.
+        ptr ++;
+      }else{
+        // if the ball can't go, then k --
+        // if this is the last ball, return ptr
+        // if this is not the last ball, update list[ptr]++
+        // then break ptr loop, let the next ball coime
+        k --;
+        list[ptr] += 1;
+        if(k == 0){
+          //cout << "stop here: " ;
+          cout << ptr + 1 << endl;
+          return;
+        }
+        break;
+      }    
+    }
+
+    
+    // if the ball goes to the end, break this big loop and return -1
+    if (ptr == n - 1){
+      break;
+    }
+    
+  }
+  
+  cout << -1 << endl;
+  return;
+  
 }
 
 int main()
 {
-
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-
-	int tc;
+  int tc;
   SCD(tc);
   
 	while (tc --> 0){
     solve();
   }
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
-	return 0;
+  
+	
 }
 /********  Main() Ends Here *************/

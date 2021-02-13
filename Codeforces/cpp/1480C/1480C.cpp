@@ -72,31 +72,72 @@ typedef unsigned long long int uint64;
 #define watch(x) cout << (#x) << " is " << (x) << endl;
 
 /********** Main()  function **********/
-void solve() {
+VI N(100001,0);
 
+void query(int k){
+  cout << "? " << k << endl;
+  cout.flush();
+  cin >> N[k];
+}
+
+void answer(int k){
+  cout << "! " << k << endl;
 }
 
 int main()
 {
-
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
-
-	int tc;
-  SCD(tc);
+  int n;
+  cin >> n;
   
-	while (tc --> 0){
-    solve();
+  if (n == 1){
+    answer(1);
+    return 0;
   }
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
+  
+  query(1);
+  query(2);
+  
+  if (N[2] > N[1]){
+    answer(1);
+    return 0;
+  }
+  
+  query(n);
+  query(n-1);
+   
+  if (N[n-1] > N[n]){
+    answer(n);
+    return 0;
+  }
+  
+  int lo = 1;
+  int hi = n;
+  
+  while(lo < hi){
+    int m = (lo + hi) / 2;
+    
+    if (N[m] == 0)
+      query(m);
+  
+    if (N[m-1] == 0)
+      query(m-1);
+    
+    if (N[m+1] == 0)  
+      query(m+1);
+    
+    if (N[m] < min(N[m-1], N[m+1])){
+      answer(m);
+      return 0;
+    }
+    
+    if(N[m-1] < N[m+1]){
+      hi = m;
+    }else{
+      lo = m;
+    }
+    
+  }
+  
 	return 0;
 }
 /********  Main() Ends Here *************/

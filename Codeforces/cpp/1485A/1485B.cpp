@@ -72,25 +72,73 @@ typedef unsigned long long int uint64;
 #define watch(x) cout << (#x) << " is " << (x) << endl;
 
 /********** Main()  function **********/
+
 void solve() {
+  int n,q,k;
+  cin >> n >>  q >>  k;
+  
+  VI list(n);
+  
+  FOR(i, 0, n, 1){
+    cin >> list[i];
+  }
+  
+  VI table(n);
+  
+  if (n == 1){
+    table[0] = k-1;
+  }
+  
+  FOR(i, 0, n, 1){
+    if(i == 0){
+      table[i] = list[i + 1] - 0 - 2;
+    }else if(i == n-1){
+      table[i] = k - list[i-1] - 2 + table[i-1];
+    }else{
+      table[i] = table[i-1] + list[i+1] - list[i - 1] - 2;
+    }
+  }
+  
+  FOR(i, 0, q, 1){
+    int l, r;
+    cin >> l >> r;
+    l--;
+    r--;
+    
+    if(l == r){
+        cout << k - 1 << endl;
+        continue;
+    }
+    
+    int sum = 0;
+    
+    
+      // watch(ll);
+      // watch(rr);
+      
+      sum += rr - ll - 2;
+    }
+    
+    cout << sum << endl;
+  }
 
 }
 
 int main()
 {
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// //freopen("output.txt","w",stdout);
+	// #endif
 
-
-	int tc;
-  SCD(tc);
+	// int tc;
+  // SCD(tc);
   
-	while (tc --> 0){
-    solve();
-  }
+	// while (tc --> 0){
+  //   solve();
+  // }
+  solve();
 	// int tc;
 	// tc = read(int);
 
