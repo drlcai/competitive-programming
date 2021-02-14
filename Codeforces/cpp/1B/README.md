@@ -1,4 +1,4 @@
-Difficulty 1600. Time: 1hour.
+Difficulty: 1600. Time: 1hour.
 
 This took me an hour to implement, which should not be the case. The problem is easy to understand and a bit complicated to implement.
 
@@ -10,3 +10,5 @@ The other direction is much simpler.
 
 I wasted some time on reviewing c++ string and methods like `to_string, isalpha, isdigit, stoi`.
 I always have some fear about using such methods, hope this time I can memorize all of them. 
+
+
