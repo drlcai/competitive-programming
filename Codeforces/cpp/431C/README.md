@@ -14,7 +14,7 @@ Note that `d` is always smaller than `k`, but `k` and `n` are not determined. So
 To secure the right subscript,
 in this problem I did 3 cases to avoid it: `n<k, n=k, n>k`. 
 
-=================
+==================
 
 Below is the official tutorial. It is cleverer because it uses a 2-d table and also the code has some nice tricks for me to learn:
 * Its two different dp tables are not the same as mine. They clearly distinguish the number of ways to "have" an edge greter than `d` and "not have".
