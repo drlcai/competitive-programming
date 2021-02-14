@@ -26,8 +26,8 @@
 using namespace std;
 
 /*******  All Required define Pre-Processors and typedef Constants *******/
-#define SCD(t) scanf("%d",&t)
-#define SCLD(t) scanf("%ld",&t)
+#define scd(t) scanf("%d",&t)
+#define scld(t) scanf("%ld",&t)
 #define SCLLD(t) scanf("%lld",&t)
 #define SCC(t) scanf("%c",&t)
 #define SCS(t) scanf("%s",t)
@@ -42,16 +42,13 @@ using namespace std;
 #define rall(cont) cont.end(), cont.begin()
 #define FOREACH(it, l) for (auto it = l.begin(); it != l.end(); it++)
 #define IN(A, B, C) assert( B <= A && A <= C)
-#define MP make_pair
-#define PB push_back
+#define mp make_pair
+#define pb push_back
 
 #define INF (int)1e9
 #define EPS 1e-9
 #define PI 3.1415926535897932384626433832795
 #define MOD 1000000007
-#define OOO 1000000010
-const double pi = acos(-1.0);
-
 
 #define read(type) readInt<type>()
 
@@ -70,6 +67,8 @@ typedef long long int int64;
 typedef unsigned long long int uint64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
+
+const double pi = acos(-1.0);
 
 /********** Main()  function **********/
 void solve() {

@@ -26,8 +26,8 @@
 using namespace std;
 
 /*******  All Required define Pre-Processors and typedef Constants *******/
-#define SCD(t) scanf("%d",&t)
-#define SCLD(t) scanf("%ld",&t)
+#define scd(t) scanf("%d",&t)
+#define scld(t) scanf("%ld",&t)
 #define SCLLD(t) scanf("%lld",&t)
 #define SCC(t) scanf("%c",&t)
 #define SCS(t) scanf("%s",t)
@@ -42,16 +42,13 @@ using namespace std;
 #define rall(cont) cont.end(), cont.begin()
 #define FOREACH(it, l) for (auto it = l.begin(); it != l.end(); it++)
 #define IN(A, B, C) assert( B <= A && A <= C)
-#define MP make_pair
-#define PB push_back
+#define mp make_pair
+#define pb push_back
 
 #define INF (int)1e9
 #define EPS 1e-9
 #define PI 3.1415926535897932384626433832795
 #define MOD 1000000007
-#define OOO 1000000010
-const double pi = acos(-1.0);
-
 
 #define read(type) readInt<type>()
 
@@ -71,55 +68,24 @@ typedef unsigned long long int uint64;
 
 #define watch(x) cout << (#x) << " is " << (x) << endl;
 
+const double pi = acos(-1.0);
+
 /********** Main()  function **********/
 
-int solve2(int a, int b){
-  double res = 0;
-  // while(a > 0){
-  //   a = a/b;
-  //   res ++;
-  // }
-  res = log(a) / log(b) + 1;
-
-  return (int)(res + 1e-12);
-}
-
-int solve1(int a, int b){
-  if (a < b)
-    return 1;
-  
-  if (a == b){
-    return 2;
-  }
-  
-  if (b == 1){
-    return 1 + solve1(a, 2);
-  }
-  
-  int l = solve2(a, b);
-  
-  int res = l;
-  
-  FOR(i, 1, 30, 1){
-    int temp = i + solve2(a, b+i);
-    
-    if (temp < res){
-      res = temp;
-    }
-
-  }
-  
-  return res;
-  
-}
-
 void solve() {
-  int a,b;
-  cin >> a >> b;
-  int res = solve1(a,b);
+  int x, y;
+  cin >> x >> y;
   
-  cout << res << endl;
-
+  int rest = 1;
+  int64 ans = 0;
+  
+  for(; rest < 1e5; rest++){
+    int bmax = (x - rest) / rest;
+    bmax = min(y, bmax);
+    ans += (int64)(max(0, bmax - rest));
+  }
+  
+  cout << ans << endl;
 }
 
 int main()
@@ -131,7 +97,7 @@ int main()
 	// #endif
 
 	int tc;
-  SCD(tc);
+  scd(tc);
   
 	while (tc --> 0){
     solve();
