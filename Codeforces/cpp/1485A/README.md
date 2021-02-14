@@ -16,3 +16,4 @@ However if we cast it to int, this gives us 2.
 This is very related to the floating point number in C++ or any programming language. 
 
 The trick to solve it is to add 1e-12 to the numbers so it doesn't cast it to a wrong way. 
+In other cases, we should probably try +1e-9 or something else. We should always try it. 
