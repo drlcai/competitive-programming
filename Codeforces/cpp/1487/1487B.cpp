@@ -72,16 +72,35 @@ const double pi = acos(-1.0);
 
 /********** Main()  function **********/
 void solve() {
-
+  int n, k;
+  
+  cin >> n >> k;
+  
+  // n is even
+  // never conflict 
+  if (n % 2 == 0){
+    cout << (k - 1) % n + 1 << endl;
+    return;
+  }
+  
+  // n is odd
+  // steps = k - 1
+  
+  int steps = k - 1;
+  int badd = steps / ((n - 1) / 2);
+  
+  int bpos = (steps + badd) % n;
+  cout << bpos + 1 << endl;
+    
 }
 
 int main()
 {
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// //freopen("output.txt","w",stdout);
+	// #endif
 
 
 	int tc;

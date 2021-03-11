@@ -71,17 +71,34 @@ typedef unsigned long long int uint64;
 const double pi = acos(-1.0);
 
 /********** Main()  function **********/
-void solve() {
 
+void solve() {
+  
+  int n;
+  
+  cin >> n;
+  
+  int ans = 0;
+  
+  while(2 * ans * ans + 2 * ans + 1 < n){
+    ans ++;
+  }
+  
+  if (2 * ans * ans + 2 * ans + 1 == n){
+    cout << ans << endl;
+  }else{
+    cout << ans - 1 << endl;
+  }
+  
 }
 
 int main()
 {
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// //freopen("output.txt","w",stdout);
+	// #endif
 
 
 	int tc;

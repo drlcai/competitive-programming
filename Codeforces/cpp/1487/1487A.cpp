@@ -72,17 +72,49 @@ const double pi = acos(-1.0);
 
 /********** Main()  function **********/
 void solve() {
-
-}
+  int n;
+	scd(n);
+	
+	VI heros(n);
+	
+	FOR(i, 0, n,1){
+		cin >> heros[i];
+	}
+	
+	sort(heros.begin(), heros.end());
+	
+	// FOR(i, 0, n, 1){
+	// 	cout << heros[i] << endl;
+	// }
+	
+	if (n == 1){
+		cout << 1 << endl;
+		return;
+	}
+	
+	int ptr = 1;
+	int cmp = heros[0];
+	
+	int ans = 0;
+	while(ptr < n){
+		if (heros[ptr] > cmp){
+			ans += n - ptr;
+			break;
+		}
+		ptr ++;
+	}
+	
+	cout << ans << endl;
+	
+} 
 
 int main()
 {
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
-	#endif
-
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// //freopen("output.txt","w",stdout);
+	// #endif
 
 	int tc;
   scd(tc);
