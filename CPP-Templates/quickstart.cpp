@@ -26,8 +26,8 @@
 using namespace std;
 
 /*******  All Required define Pre-Processors and typedef Constants *******/
-#define scd(t) scanf("%d",&t)
-#define scld(t) scanf("%ld",&t)
+#define SCD(t) scanf("%d",&t)
+#define SCLD(t) scanf("%ld",&t)
 #define SCLLD(t) scanf("%lld",&t)
 #define SCC(t) scanf("%c",&t)
 #define SCS(t) scanf("%s",t)
