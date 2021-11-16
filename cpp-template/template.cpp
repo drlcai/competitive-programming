@@ -1,15 +1,18 @@
 #include "bits/stdc++.h"
 using namespace std;
-
+ 
+// #pragma GCC optimize("O3")
+// #pragma GCC target("avx2")
+ 
 #define send {ios_base::sync_with_stdio(false);}
 #define help {cin.tie(NULL);}
-// #define f first
-// #define s second
+#define f first
+#define s second
 #define getunique(v) {sort(v.begin(), v.end()); v.erase(unique(v.begin(), v.end()), v.end());}
  
-//#define Local
-
 typedef long long ll;
+// typedef int ll;
+// #pragma warning("int")
  
 typedef long double lld;
 typedef unsigned long long ull;
@@ -38,38 +41,54 @@ void usaco(string filename) {
 // using namespace atcoder;
  
 const lld pi = 3.14159265358979323846;
-const ll mod = 1000000007;
-
-
+// const ll mod = 1000000007;
+// const ll mod = 998244353;
+// ll mod;
+ 
+ 
+ 
 ll n, m, q, k, l, r, x, y, z;
-// const ll template_array_size = 1e6 + 16614;
-// ll a[template_array_size];
-// ll b[template_array_size];
-// ll c[template_array_size];
-// string s, t;
-
+const ll template_array_size = 1e6 + 17928;
+ll a[template_array_size];
+ll b[template_array_size];
+ll c[template_array_size];
+string s, t;
+ 
+ 
+ 
 void solve(int tc = 0) {
-
+	
 }
  
 int main() {
-	#ifdef LOCAL
+	#ifdef leran_cai_local
 		auto begin = std::chrono::high_resolution_clock::now();
 	#endif
 	
 	send help
  
-	#ifndef LOCAL
-		
+	#ifndef leran_cai_local
+		// usaco("evacuation");
 	#endif
-			
+	
+	// usaco("cowland");
+	
+	// freopen("tc.cpp", "r", stdin);
+	// freopen("tc2.cpp", "w", stdout);
+	// freopen("in.txt", "r", stdin);
+	// freopen("out.txt", "w", stdout);
+		
 	cout << setprecision(15) << fixed;
  
+	
+		
 	int tc = 1;
 	cin >> tc;
-	for (int t = 0; t < tc; t++) solve(t);
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
-	#ifdef LOCAL
+	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();
 		cerr << setprecision(4) << fixed;
 		cerr << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<double>>(end - begin).count() << " seconds" << endl;
