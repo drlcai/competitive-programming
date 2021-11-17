@@ -1,1 +1,2 @@
-﻿Problem,Difficulty,Status,Topics,Metacognition,Takeaways,Analysis
+﻿Problem,Difficulty,Status,Topics,Metacognition,Takeaways,Analysis,Time
+1B,1600,AC,"implementation, maths",The tricky part is to realize there's no leading 0's and we need to find a way to convert the second type to the first. That's the hardest part. ,"isnum, isalpha, stoi",Should type faster and don’t waste much time on implementations. Then realize how to convert the number to the string. Done. ,20min

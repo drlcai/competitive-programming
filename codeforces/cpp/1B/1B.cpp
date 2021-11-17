@@ -1,4 +1,4 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 using namespace std;
  
 // #pragma GCC optimize("O3")
@@ -26,8 +26,8 @@ template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p
 	cin >> p.first;
 	return cin >> p.second;
 }
- 
-mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+
+// mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 // mt19937_64 rng(61378913);
 /* usage - just do rng() */
  
@@ -47,7 +47,7 @@ const lld pi = 3.14159265358979323846;
  
  
  
-ll n, m, q, k, l, r, x, y, z;
+ll n, m, q, k, l, r, x, y, z, idx;
 const ll template_array_size = 1e6 + 17928;
 ll a[template_array_size];
 ll b[template_array_size];
@@ -55,8 +55,82 @@ ll c[template_array_size];
 string s, t;
  
  
+ bool ist1(string str){
+	 
+	 bool flag = false;
+	 
+	 for (int i = 0; i < str.size(); ++i){
+		 if (!flag && isdigit(str[i]) ) {
+			 flag = true;
+		 } 
+		 
+		 if (flag && isalpha(str[i]) ){
+			 return false;
+		 }
+	 }
+	 return true;
+ }
+
+string cv1to2(string str) {
+	idx = 0;
+	
+	string s1, s2;
+	
+	while( isalpha(str[idx]) ){
+		idx ++;
+	}
+	s1 = str.substr(0, idx);
+	s2 = str.substr(idx, str.size());
+	
+	x = 0;
+	for (int i = 0; i < s1.size(); ++i){
+		x = ((s1[i] - 'A') + 1) + (26 * x);
+	}
+
+	s1 = to_string(x);
+	
+	return "R" + s2 + "C" + s1;
+} 
+
+string cv2to1(string str){
+	idx = 0;	
+	
+	while(str[idx] != 'C'){
+		idx ++;
+	}
+	
+	string row = str.substr(1, idx-1);
+		
+	string col = str.substr(idx+1, str.size());
+	
+	x = stoi(col);
+	string coln = "";
+	
+	while (x != 0){		
+		int t = x % 26;
+		if (t == 0){
+			x -= 26;
+			coln = 'Z' + coln;
+		}else{
+			x -= t;
+			coln = char('A' + t - 1) + coln;
+		}
+		
+		x = x / 26;
+	}
+	
+	return coln + row;
+}
  
 void solve(int tc = 0) {
+	string str;
+	cin >> str;
+	
+	if (ist1(str)){
+		cout << cv1to2(str) << endl;
+	}else{
+		cout << cv2to1(str) << endl;
+	}
 	
 }
  
