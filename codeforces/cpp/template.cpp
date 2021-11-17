@@ -16,6 +16,8 @@ typedef long long ll;
  
 typedef long double lld;
 typedef unsigned long long ull;
+
+typedef vector<int> vi;
  
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
@@ -27,7 +29,7 @@ template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p
 	return cin >> p.second;
 }
  
-mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+//mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 // mt19937_64 rng(61378913);
 /* usage - just do rng() */
  
