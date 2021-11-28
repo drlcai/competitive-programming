@@ -18,6 +18,7 @@ typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
+typedef vector<ll> vll;
  
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
@@ -59,20 +60,48 @@ string s, t;
  
  
 void solve(int tc = 0) {
-	cin >> n;
-  x = 0;
-  z = 0;
-  for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
+	int n, a, b;
+  cin >> n >> a >> b;
+  
+  int m = n/2;
+  
+  if (a > b && ( b - 1 < m-1 || n - a < m-1 ) ){
+    cout << -1 << endl;
+    return;
   }
   
-  while( z * n - x <= x ){
-    z ++;
+  if ( a < b && (b - 2 < m-1 || n - a - 1 < m-1)){
+    cout << -1 << endl;
+    return;
   }
   
-  cout << z;
+  vi res(n);
+  res[0] = a;
+  res[m] = b;
+  
+  int left = n;
+  int right = 1;
+  
+  for(int i = 1; i < m; ++i){
+    if(left == b){
+      left --;
+    }
+    res[i] = left;
+    left --;
+  }
+  
+  for(int i = m+1; i < n; ++i){
+    if(right == a){
+      right++;
+    }
+    res[i] = right;
+    right++;
+  }
+  
+  for(int i = 0; i < n; ++i){
+    cout << res[i] << " ";
+  }
+  cout << endl;
   
 }
  
@@ -99,13 +128,10 @@ int main() {
 	
 		
 	int tc = 1;
-	// cin >> tc;
-	// for (int t = 0; t < tc; t++) {
-	// 	solve(t);
-	// }
-  
-  solve();
-  
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();

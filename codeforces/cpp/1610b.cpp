@@ -18,6 +18,7 @@ typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
+typedef vector<ll> vll;
  
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
@@ -57,22 +58,97 @@ ll c[template_array_size];
 string s, t;
  
  
+bool check(vi arr, int x, int ids, int ide){
+  
+  // for (int i = ids; i <= ide; ++i){
+  //   cout << arr[i] << " " ;
+  // }
+  // cout << endl;
+  
+  while (ids < ide){
+    if (arr[ids] == arr[ide]){
+      // nothing
+    }else{ // ids and ide are different
+      // already jumped, use the x to check
+      if (x != -1){
+        // if cant jump, NO
+        if (arr[ids] != x && arr[ide] != x){
+          return false;      
+        }
+        // if we can jump, arr[ids] and arr[ide] cant be both x
+        // whichever it is, we jump until it is not x
+        while (arr[ids] == x){
+          ids ++;
+        }
+        while (arr[ide] == x){
+          ide --;
+        }
+        // now we are sure we jumped all the xs on one end
+        // if still not equal quit
+        if(arr[ids] != arr[ide]){
+          return false;
+        }
+        // if equal, we continue to check, move to ids++ and ide--
+      }else{ //x is -1, haven't jumped
+        
+        int jl = ids;
+        int jr = ide;
+        
+        while(arr[jl] == arr[jl+1]){
+          jl ++;
+        }
+        while(arr[jr] == arr[jr-1]){
+          jr --;
+        }
+        
+        // now we both skipped the duplicated stuff
+        jl ++;
+        jr --;
+        
+        // both sides are not possible
+        if (arr[jl] != arr[ide] && arr[jr] != arr[ids] ){
+          // cross different
+          // no x can fix this
+          return false;
+        }
+        
+        // both sides are possible
+        if (arr[jl] == arr[ide] && arr[jr] == arr[ids]){
+          // jump ids || jump ide
+          return (check(arr, arr[ids], jl, ide ) || check(arr, arr[ide], ids, jr ));
+        }
+        
+        // // only one side is possible
+        if (arr[jl] == arr[ide]){
+          return check(arr, arr[ids], jl, ide);
+        }else{
+          return check(arr, arr[ide], ids, jr);
+        }
+        
+      }
+    }
+    ids ++;
+    ide --;
+  }
+  
+   return true;
+}
+ 
  
 void solve(int tc = 0) {
 	cin >> n;
-  x = 0;
-  z = 0;
+  
+  vi arr(n);
+  
   for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
+    cin >> arr[i];
   }
   
-  while( z * n - x <= x ){
-    z ++;
-  }
-  
-  cout << z;
+  if (check(arr, -1, 0, n-1))
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
+
   
 }
  
@@ -99,13 +175,10 @@ int main() {
 	
 		
 	int tc = 1;
-	// cin >> tc;
-	// for (int t = 0; t < tc; t++) {
-	// 	solve(t);
-	// }
-  
-  solve();
-  
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();

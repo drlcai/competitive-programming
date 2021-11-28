@@ -18,6 +18,7 @@ typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
+typedef vector<ll> vll;
  
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
@@ -36,7 +37,7 @@ template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p
 void usaco(string filename) {
   // #pragma message("be careful, freopen may be wrong")
 	freopen((filename + ".in").c_str(), "r", stdin);
-	freopen((filename + ".out").c_str(), "w", stdout);
+	//freopen((filename + ".out").c_str(), "w", stdout);
 }
  
 // #include <atcoder/all>
@@ -55,25 +56,49 @@ ll a[template_array_size];
 ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
- 
- 
- 
+
+char switches[1010][1010];
+char lights[1010][1010];
+
 void solve(int tc = 0) {
-	cin >> n;
-  x = 0;
-  z = 0;
-  for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
+	cin >> n >> m;
+	ll mod = 1000003;
+  
+  memset(switches, 0 , sizeof(switches));
+  memset(lights, 0, sizeof(lights));
+  
+  for (int i = 0; i < m; ++i){
+    string s1, s2;
+    cin >> s1 >> s2;
+    
+    for (int j = 0; j < n; ++j){
+      switches[j][i] = s1[j];
+      lights[j][i] = s2[j];
+    }
   }
   
-  while( z * n - x <= x ){
-    z ++;
-  }
-  
-  cout << z;
-  
+	qsort(switches, n, sizeof(*switches), (int (*)(const void*, const void*))strcmp);
+  qsort(lights, n, sizeof(*lights), (int (*)(const void*, const void*))strcmp);
+
+	ll res = 1;
+		
+	// every time we move within the identical set, count and compute res
+	// then add 1 to leave the set, to avoid bugs...
+	
+	for (int i = 0; i < n; ++i){
+		int j = i;
+
+		for(; j < n ; ++j){
+			if (strcmp(switches[i], switches[j])) break;
+			if (strcmp(lights[j], switches[i])) res = 0;
+		}
+		for (int k = 1; k <= (j-i); ++k)
+      res = (res * k) % mod;
+			
+		i = j - 1;
+	}
+	
+	cout << res;
 }
  
 int main() {
@@ -84,10 +109,10 @@ int main() {
 	send help
  
 	#ifndef leran_cai_local
-		// usaco("evacuation");
+		// usaco("");
 	#endif
 	
-	// usaco("cowland");
+	//usaco("apparatus.04");
 	
 	// freopen("tc.cpp", "r", stdin);
 	// freopen("tc2.cpp", "w", stdout);
@@ -96,16 +121,13 @@ int main() {
 		
 	cout << setprecision(15) << fixed;
  
-	
+  solve();
 		
-	int tc = 1;
+	// int tc = 1;
 	// cin >> tc;
 	// for (int t = 0; t < tc; t++) {
 	// 	solve(t);
 	// }
-  
-  solve();
-  
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();

@@ -1,0 +1,3 @@
+﻿Problem,Difficulty,Status,Time,Topics,Metacognition,Takeaways,Analysis
+apparatus,6,AC,6h,"permutation, linear algebra, matrix column sort ",Spot that the columns are not changed.,"qsort, use for loops when we are stupid. ",
+friends,8,AC,12h,"bit operation, graph, implementation",Understand cliques,fast intersection and bit code for graphs.,

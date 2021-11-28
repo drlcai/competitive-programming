@@ -18,6 +18,7 @@ typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
+typedef vector<ll> vll;
  
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
@@ -57,22 +58,77 @@ ll c[template_array_size];
 string s, t;
  
  
+ull f(ull x){
+  return x * (x + 1) /2;
+}
+
+ull g(ull k, ull mid){
+  return (k + mid - 1) * (k - mid) /2;
+}
  
 void solve(int tc = 0) {
-	cin >> n;
-  x = 0;
-  z = 0;
-  for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
-  }
+  // binary search
   
-  while( z * n - x <= x ){
-    z ++;
-  }
+	ull k,x;
+  cin >> k >> x;
   
-  cout << z;
+  if (k * k < x){
+    cout << 2 * k - 1 << endl;
+  }else if (f(k) < x ){
+    
+    ull residual = x - f(k);
+    ull lo = 1;
+    ull hi = k;
+    
+    //cout << residual << endl;
+    
+    while(lo < hi){
+      
+      // g(lo) >= x
+      // g(hi) < x
+      ull mid = (lo + hi + 1) / 2 ;
+      //cout << g(k, mid) << endl;
+      // cout << (g(k,mid) < residual) << endl;
+      // cout << (g(k,mid-1) >= residual) << endl;
+      
+      if(g(k,mid) < residual && g(k,mid-1) >= residual){
+        cout << k * 2 - mid + 1 << endl;
+        return;
+      }
+      
+      if(g(k,mid) >= residual){
+        lo = mid;
+      }else{
+        hi = mid;
+      }
+    }
+
+    
+  }else{ // in the former
+    ull lo = 0;
+    ull hi = k;
+    
+    while(lo < hi){
+      // f(lo) < x
+      // f(hi) >= x
+      
+      ull mid = (lo + hi) / 2;
+      
+      if (f(mid) < x && f(mid+1) >= x){
+        cout << mid + 1 << endl;
+        return;
+      }
+      
+      if(f(mid) >= x ){
+        hi = mid;
+      }else{
+        lo = mid;
+      }
+      
+      
+    }
+    
+  }
   
 }
  
@@ -99,13 +155,10 @@ int main() {
 	
 		
 	int tc = 1;
-	// cin >> tc;
-	// for (int t = 0; t < tc; t++) {
-	// 	solve(t);
-	// }
-  
-  solve();
-  
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();

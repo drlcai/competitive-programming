@@ -18,6 +18,9 @@ typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
+typedef vector<ll> vll;
+
+typedef pair<int, int> pii;
  
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
@@ -56,24 +59,57 @@ ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
  
- 
+bool possible(vector<pii> people, int mid){
+	// int used = 0;
+	// int target = mid;
+	
+	// for (int i = 0; i < people.size(); ++i){
+	// 	// when can we choose the current one?
+	// 	// if the chosen ppl are <= before (it's allowed)
+	// 	// the target <= 1 + after
+	// 	if (used > people[i].second) continue;
+	// 	if (target > 1 + people[i].first) continue;
+	// 	used ++;
+	// 	target --;
+	// }
+	
+	// return target <= 0;
+	ll c = 0;
+	for(ll i = 0; i < n; i++){
+		if(mid - 1 - people[i].first <= c && c <= people[i].second) c++;
+	}
+	return c >= mid;
+}
  
 void solve(int tc = 0) {
 	cin >> n;
-  x = 0;
-  z = 0;
-  for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
-  }
-  
-  while( z * n - x <= x ){
-    z ++;
-  }
-  
-  cout << z;
-  
+	
+	// <after, before>
+	vector<pii> people(n);
+	
+	for (int i = 0; i < n; ++i){
+		int a, b;
+		cin >> a >> b;
+		people[i] = make_pair(a,b);
+	}
+	
+	// [lo, hi)
+	int lo = 0; 
+	int hi = n;
+	
+	// end condition [lo == hi)
+	while (lo < hi){
+		int mid = lo + (hi - lo + 1) / 2;
+		
+		if (possible(people, mid)){
+			lo = mid;
+		}else{
+			hi = mid - 1;
+		}
+	}
+	
+	cout << lo << endl;
+	
 }
  
 int main() {
@@ -99,13 +135,10 @@ int main() {
 	
 		
 	int tc = 1;
-	// cin >> tc;
-	// for (int t = 0; t < tc; t++) {
-	// 	solve(t);
-	// }
-  
-  solve();
-  
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();

@@ -9,16 +9,19 @@ using namespace std;
 #define f first
 #define s second
 #define getunique(v) {sort(v.begin(), v.end()); v.erase(unique(v.begin(), v.end()), v.end());}
- 
+
 typedef long long ll;
 // typedef int ll;
 // #pragma warning("int")
- 
+
 typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
- 
+typedef vector<ll> vll;
+
+typedef pair<int, int> pii;
+
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v) {
@@ -28,54 +31,104 @@ template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p
 	cin >> p.first;
 	return cin >> p.second;
 }
- 
+
 //mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 // mt19937_64 rng(61378913);
 /* usage - just do rng() */
- 
+
 void usaco(string filename) {
   // #pragma message("be careful, freopen may be wrong")
 	freopen((filename + ".in").c_str(), "r", stdin);
 	freopen((filename + ".out").c_str(), "w", stdout);
 }
- 
+
 // #include <atcoder/all>
 // using namespace atcoder;
- 
+
 const lld pi = 3.14159265358979323846;
 // const ll mod = 1000000007;
 // const ll mod = 998244353;
 // ll mod;
- 
- 
- 
+
+
+
 ll n, m, q, k, l, r, x, y, z;
 const ll template_array_size = 1e6 + 17928;
 ll a[template_array_size];
 ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
- 
- 
- 
+
+
+
 void solve(int tc = 0) {
-	cin >> n;
-  x = 0;
-  z = 0;
-  for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
+  cin >> n;
+  
+  vi b(n+1);
+  vi p(n+1);
+  
+  for(int i = 1; i <= n; ++i){
+    cin >> b[i];
   }
   
-  while( z * n - x <= x ){
-    z ++;
+  for(int i = 1; i <= n; ++i){
+    cin >> p[i];
   }
   
-  cout << z;
+  vi weight_to_top(n+1);
+  vi weights(n+1);
+  vi visited(n+1);
+  
+  if ( b[ p[1] ] != p[1]){ // root is not at 1st
+    cout << -1 << endl;
+    return;
+  }
+  
+  int root = p[1];
+  weights[root] = 0;
+  
+  // root must be valid now
+  for (int i = 1; i <= n; ++i){
+  
+    if (i == 1){
+      visited[ p[i] ] = 1;
+      continue;
+    }
+    
+    int cur_id = p[i];    
+
+    int anc_id = b[ cur_id ];
+    
+    if (visited[anc_id] == 0){
+      cout << -1 << endl;
+      return;
+    }
+    
+    int anc_to_top = weight_to_top[ anc_id ];
+    int added_weight = i - anc_to_top;
+    
+    weights[ cur_id ] = added_weight;
+    weight_to_top[ cur_id ] = i;
+    visited[ cur_id ] = 1;
+
+    cur_id = anc_id;
+
+    if (cur_id == root){
+      continue;
+    }
+
+    
+  }
+
+  
+  // output results
+  for (int i = 1; i <= n; ++i){
+    cout << weights[i] << " ";
+  }
+  cout << endl;
   
 }
- 
+  // 1 6 1 1 1 2 3 3 1 3 5 6 2 4
 int main() {
 	#ifdef leran_cai_local
 		auto begin = std::chrono::high_resolution_clock::now();
@@ -99,13 +152,10 @@ int main() {
 	
 		
 	int tc = 1;
-	// cin >> tc;
-	// for (int t = 0; t < tc; t++) {
-	// 	solve(t);
-	// }
-  
-  solve();
-  
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();

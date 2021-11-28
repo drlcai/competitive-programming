@@ -9,16 +9,19 @@ using namespace std;
 #define f first
 #define s second
 #define getunique(v) {sort(v.begin(), v.end()); v.erase(unique(v.begin(), v.end()), v.end());}
- 
+
 typedef long long ll;
 // typedef int ll;
 // #pragma warning("int")
- 
+
 typedef long double lld;
 typedef unsigned long long ull;
 
 typedef vector<int> vi;
- 
+typedef vector<ll> vll;
+
+typedef pair<int, int> pii;
+
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v) {
@@ -28,54 +31,65 @@ template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p
 	cin >> p.first;
 	return cin >> p.second;
 }
- 
+
 //mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 // mt19937_64 rng(61378913);
 /* usage - just do rng() */
- 
+
 void usaco(string filename) {
   // #pragma message("be careful, freopen may be wrong")
 	freopen((filename + ".in").c_str(), "r", stdin);
 	freopen((filename + ".out").c_str(), "w", stdout);
 }
- 
+
 // #include <atcoder/all>
 // using namespace atcoder;
- 
+
 const lld pi = 3.14159265358979323846;
 // const ll mod = 1000000007;
 // const ll mod = 998244353;
 // ll mod;
- 
- 
- 
+
+
+
 ll n, m, q, k, l, r, x, y, z;
 const ll template_array_size = 1e6 + 17928;
 ll a[template_array_size];
 ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
- 
- 
- 
+
+
+
 void solve(int tc = 0) {
-	cin >> n;
-  x = 0;
-  z = 0;
-  for (int i = 0; i < n; ++i){
-    cin >> y;
-    x += y;
-    z = max(y, z);
+  cin >> x;
+  
+  string ss = to_string(x);
+  
+  if ((ss[ss.size() - 1] - '0' ) % 2 == 0){
+    cout << 0 << endl;
+    return;
   }
   
-  while( z * n - x <= x ){
-    z ++;
+  if((ss[0] - '0') % 2 == 0){
+    cout << 1 << endl;
+    return;
   }
   
-  cout << z;
+  for (int i = 0; i < ss.size(); ++i){
+    int sss = ss[i] - '0';
+    
+    if (sss % 2 == 0){
+      cout << 2 << endl;
+      return;
+    }
+  }
   
+  cout << -1 << endl;
 }
- 
+
+
+
 int main() {
 	#ifdef leran_cai_local
 		auto begin = std::chrono::high_resolution_clock::now();
@@ -99,13 +113,10 @@ int main() {
 	
 		
 	int tc = 1;
-	// cin >> tc;
-	// for (int t = 0; t < tc; t++) {
-	// 	solve(t);
-	// }
-  
-  solve();
-  
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
 	
 	#ifdef leran_cai_local
 		auto end = std::chrono::high_resolution_clock::now();
