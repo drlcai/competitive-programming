@@ -1,160 +1,132 @@
-/********   All Required Header Files ********/
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <sstream>
-#include <queue>
-#include <deque>
-#include <bitset>
-#include <iterator>
-#include <list>
-#include <stack>
-#include <map>
-#include <set>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <limits>
-#include <time.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
-
+#include "bits/stdc++.h"
 using namespace std;
+ 
+// #pragma GCC optimize("O3")
+// #pragma GCC target("avx2")
+ 
+#define send {ios_base::sync_with_stdio(false);}
+#define help {cin.tie(NULL);}
+#define f first
+#define s second
+#define getunique(v) {sort(v.begin(), v.end()); v.erase(unique(v.begin(), v.end()), v.end());}
+#define watch(v) { for(int i = 0; i < v.size(); ++i){cout << v[i] << " "; }cout << endl; }
+#define watcharr(arr, n) {for(int i = 0; i < n; ++i){cout << arr[i] << " ";} cout << endl; }
+#define watchmap(table) {for(auto const& [key, value] : table){cout << key << " " << value << endl;} } 
 
-/*******  All Required define Pre-Processors and typedef Constants *******/
-#define SCD(t) scanf("%d",&t)
-#define SCLD(t) scanf("%ld",&t)
-#define SCLLD(t) scanf("%lld",&t)
-#define SCC(t) scanf("%c",&t)
-#define SCS(t) scanf("%s",t)
-#define SCF(t) scanf("%f",&t)
-#define SCLF(t) scanf("%lf",&t)
-#define MEM(a, b) memset(a, (b), sizeof(a))
-#define FOR(i, j, k, in) for (int i=j ; i<k ; i+=in)
-#define RFOR(i, j, k, in) for (int i=j ; i>=k ; i-=in)
-#define REP(i, j) FOR(i, 0, j, 1)
-#define RREP(i, j) RFOR(i, j, 0, 1)
-#define all(cont) cont.begin(), cont.end()
-#define rall(cont) cont.end(), cont.begin()
-#define FOREACH(it, l) for (auto it = l.begin(); it != l.end(); it++)
-#define IN(A, B, C) assert( B <= A && A <= C)
-#define MP make_pair
-#define PB push_back
+typedef long long ll;
+// typedef int ll;
+// #pragma warning("int")
 
-#define INF (int)1e9
-#define EPS 1e-9
-#define PI 3.1415926535897932384626433832795
-#define MOD 1000000007
-#define OOO 1000000010
-const double pi = acos(-1.0);
+typedef long double lld;
+typedef unsigned long long ull;
+
+typedef vector<int> vi;
+typedef vector<ll> vll;
+
+typedef pair<int, int> pii;
+
+template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
+template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p) { return cout << "(" << p.f << ", " << p.s << ")"; }
+template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v) {
+	cout << "["; for(int i = 0; i < v.size(); i++) {if (i) cout << ", "; cout << v[i];} return cout << "]";
+}
+template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p) {
+	cin >> p.first;
+	return cin >> p.second;
+}
+
+//mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+// mt19937_64 rng(61378913);
+/* usage - just do rng() */
+
+void usaco(string filename) {
+  // #pragma message("be careful, freopen may be wrong")
+	freopen((filename + ".in").c_str(), "r", stdin);
+	freopen((filename + ".out").c_str(), "w", stdout);
+}
+
+// #include <atcoder/all>
+// using namespace atcoder;
+
+const lld pi = 3.14159265358979323846;
+// const ll mod = 1000000007;
+// const ll mod = 998244353;
+// ll mod;
 
 
-#define read(type) readInt<type>()
 
-typedef pair<int, int> PII;
-typedef pair<string, string> PSS;
-typedef vector<int> VI;
-typedef vector<string> VS;
-typedef vector<PII> VII;
-typedef vector<VI> VVI;
-typedef map<int,int> MPII;
-typedef set<int> SETI;
-typedef multiset<int> MSETI;
-typedef long int int32;
-typedef unsigned long int uint32;
-typedef long long int int64;
-typedef unsigned long long int uint64;
-typedef pair<int64, int64> PII64;
-typedef vector<int64> VI64;
+ll n, m, q, k, l, r, x, y, z;
+const ll template_array_size = 1e6 + 17928;
+ll a[template_array_size];
+ll b[template_array_size];
+ll c[template_array_size];
+string s, t;
 
-#define watch(x) cout << (#x) << " is " << (x) << endl;
 
-/********** Main()  function **********/
-void solve() {
-  int64 A, B, n;
+void solve(int tc = 0) {
+  ll A, B;
   cin >> A >> B >> n;
   
-  VI64 a,b;
-  FOR(i, 0, n, 1){
-    int64 x;
-    cin >> x;
-    
-    a.push_back(x);
+  for (int i = 0; i < n; ++i){
+    cin >> a[i];
   }
   
-  FOR(i, 0, n, 1){
-    int64 y;
-    cin >> y;
-    b.push_back(y);
+  for (int i = 0; i < n; ++i){
+    cin >> b[i];
   }
   
-  priority_queue<PII64, vector<PII64>, greater<PII64> > pq;
-  
-  FOR(i, 0, n, 1){
-    int64 natt = b[i] / A + (b[i] % A != 0);
-    //watch(natt);
-    int64 dmg = natt * a[i];
-    
-    pq.push(make_pair( (int64)a[i], dmg));
+  for (int i = 0; i < n; ++i){
+    ll r = 0;
+    if (b[i] % A == 0){
+      r = b[i] / A;
+    }else{
+      r = b[i] / A + 1;
+    }
+    B -= a[i] * r;
   }
   
-  int kill = 0;
-  while (!pq.empty()){
-      //cout << pq.top().first << " ";
-      PII64 monster = pq.top();
-      watch(monster.first);
-      watch(monster.second);
-      pq.pop();
-      if(B > monster.second){
-        kill ++;
-        B -= monster.second;
-        //watch(B);
-      }else{
-        if(B > monster.second - monster.first)
-          kill ++;
-        
-        //watch(B);
-        break;
-      }
-      
+  for (int i = 0; i < n; ++i){
+    if (B + a[i] > 0){
+      cout << "YES" << endl;
+      return;
+    }
   }
   
-  if(kill >= n){
-    cout << "YES" << endl;
-  }else{
-    cout << "NO" << endl;
-  }
-  
-  
-  
-    
+  cout << "NO" << endl;
+
 }
 
-int main()
-{
-
-	// #ifndef ONLINE_JUDGE
-	// freopen("input.txt","r",stdin);
-	// //freopen("output.txt","w",stdout);
-	// #endif
-
-
-	int tc;
-  SCD(tc);
-  
-	while (tc --> 0){
-    solve();
-  }
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
-	return 0;
+int main() {
+	#ifdef leran_cai_local
+		auto begin = std::chrono::high_resolution_clock::now();
+	#endif
+	
+	//send help
+ 
+	#ifndef leran_cai_local
+		// usaco("evacuation");
+	#endif
+	
+	// usaco("cowland");
+	
+	// freopen("tc.cpp", "r", stdin);
+	// freopen("tc2.cpp", "w", stdout);
+	// freopen("in.txt", "r", stdin);
+	// freopen("out.txt", "w", stdout);
+		
+	cout << setprecision(15) << fixed;
+ 
+	
+		
+	int tc = 1;
+	cin >> tc;
+	for (int t = 0; t < tc; t++) {
+		solve(t);
+	}
+	
+	#ifdef leran_cai_local
+		auto end = std::chrono::high_resolution_clock::now();
+		cerr << setprecision(4) << fixed;
+		cerr << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<double>>(end - begin).count() << " seconds" << endl;
+	#endif
 }
-/********  Main() Ends Here *************/

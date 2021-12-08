@@ -62,18 +62,31 @@ ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
 
-
+int countSetBits(ll n)
+{
+    int count = 0;
+    while (n) {
+        count += n & 1;
+        n >>= 1;
+    }
+    return count;
+}
 
 void solve(int tc = 0) {
-  cin >> n >> k;
+	cin >> n;
   
-  if (n % 2 == 0){
-    cout << (k - 1) % n + 1 << endl;
-    return;
+  unsigned int sum = 0;
+  for (int i = 0; i < n; ++i){
+    unsigned int temp;
+    cin >> temp;
+    //cout << countSetBits(temp) << endl;
+    sum = sum ^ temp;
+    cout << sum << endl;
   }
   
-  int add = (k-1) / (n / 2);
-  cout << (k - 1 + add) % n + 1 << endl;
+  sum = countSetBits(sum);
+  cout << sum << endl;
+  
   
 }
 
@@ -98,7 +111,7 @@ int main() {
 	cout << setprecision(15) << fixed;
  	
 	int tc = 1;
-	cin >> tc;
+	//cin >> tc;
 	for (int t = 0; t < tc; t++) {
 		solve(t);
 	}

@@ -63,17 +63,74 @@ ll c[template_array_size];
 string s, t;
 
 
-
-void solve(int tc = 0) {
-  cin >> n >> k;
-  
-  if (n % 2 == 0){
-    cout << (k - 1) % n + 1 << endl;
-    return;
+char choose(vector<char> colors){
+  char ans;
+  bool test[] = {true,true,true,true,true};
+  for (int i = 0; i < colors.size(); ++i){
+    if (colors[i] == '.'){
+      continue;
+    }
+    
+    test[ (colors[i] - '1') ] = false;
   }
   
-  int add = (k-1) / (n / 2);
-  cout << (k - 1 + add) % n + 1 << endl;
+  for (int i = 0; i < 5; ++i){
+    if(test[i]){
+      ans = (char)('1' + i);
+      break;
+    }
+  }
+  
+  return ans;
+}
+
+void solve(int tc = 0) {
+	int H,W;
+  cin >> H >> W;
+  
+  vector< vector<char> > table(H);
+  
+  for (int i = 0; i < H; ++i){
+    vector<char> temp(W);
+    table[i] = temp;
+  }
+  
+  for (int i = 0; i < H; ++i){
+    for (int j = 0; j < W; ++j){
+      cin >> table[i][j];
+    }
+  }
+  
+  int dRow[] = { 0, 1, 0, -1 };
+  int dCol[] = { -1, 0, 1, 0 }; 
+
+  for (int i = 0; i < H; ++i){
+    for (int j = 0; j < W; ++j){
+      if (table[i][j] == '.'){
+        vector<char> colors;
+        for (int d = 0; d < 4; ++d){
+          int di = i + dRow[d];
+          int dj = j + dCol[d];
+          
+          if (di >= 0 && di < H && dj >=0 && dj < W){
+            colors.push_back(table[di][dj]);
+          }
+        }
+        
+        table[i][j] = choose(colors);
+        
+      }
+    }
+  }
+  
+  
+  // watch
+  for (int i = 0; i < H; ++i){
+    for (int j = 0; j < W; ++j){
+      cout << table[i][j];
+    }
+    cout << endl;
+  }
   
 }
 
@@ -98,7 +155,7 @@ int main() {
 	cout << setprecision(15) << fixed;
  	
 	int tc = 1;
-	cin >> tc;
+	//cin >> tc;
 	for (int t = 0; t < tc; t++) {
 		solve(t);
 	}

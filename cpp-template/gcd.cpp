@@ -62,19 +62,16 @@ ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
 
-
+ll gcd (ll a, ll b) {
+    while (b) {
+        a %= b;
+        swap(a, b);
+    }
+    return a;
+}
 
 void solve(int tc = 0) {
-  cin >> n >> k;
-  
-  if (n % 2 == 0){
-    cout << (k - 1) % n + 1 << endl;
-    return;
-  }
-  
-  int add = (k-1) / (n / 2);
-  cout << (k - 1 + add) % n + 1 << endl;
-  
+
 }
 
 int main() {
@@ -96,7 +93,9 @@ int main() {
 	// freopen("out.txt", "w", stdout);
 		
 	cout << setprecision(15) << fixed;
- 	
+ 
+	
+		
 	int tc = 1;
 	cin >> tc;
 	for (int t = 0; t < tc; t++) {

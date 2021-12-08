@@ -65,15 +65,14 @@ string s, t;
 
 
 void solve(int tc = 0) {
-  cin >> n >> k;
+	ull a,b;
+	cin >> a >> b;
   
-  if (n % 2 == 0){
-    cout << (k - 1) % n + 1 << endl;
-    return;
-  }
-  
-  int add = (k-1) / (n / 2);
-  cout << (k - 1 + add) % n + 1 << endl;
+  ull ans = a;
+  ull shift = (to_string(a)).size();
+  shift++;
+  ans = b * 10 / 2 * (ull)(pow(10, shift)) + a;
+  cout << ans << endl;
   
 }
 
@@ -98,7 +97,7 @@ int main() {
 	cout << setprecision(15) << fixed;
  	
 	int tc = 1;
-	cin >> tc;
+	//cin >> tc;
 	for (int t = 0; t < tc; t++) {
 		solve(t);
 	}
