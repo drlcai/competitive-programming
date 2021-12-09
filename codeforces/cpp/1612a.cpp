@@ -66,20 +66,11 @@ void solve(int tc = 0) {
     cout << -1 << " " << -1 << endl;
     return;
   }
-  
-  int cx, cy;
-  
-  int dis = 0;
-  
-  dis = (x + y)/2;
+    
+  int dis = (x + y)/2;
   
   cout << x/2 << " " << dis - x/2 << endl;
-  
-  if (cx % 2 == 0){
-    cout << x/2 << " " << y/2 << endl;
-  }else{
-    cout << x/2 << dis - x/2    
-  }
+
 }
  
 int main() {

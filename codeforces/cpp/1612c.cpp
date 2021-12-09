@@ -58,12 +58,12 @@ ll c[template_array_size];
 string s, t;
  
  
-ull f(ull x){
-  return x * (x + 1) /2;
+ull f(ull mid){
+  return mid * (mid + 1) /2;
 }
 
 ull g(ull k, ull mid){
-  return (k + mid - 1) * (k - mid) /2;
+  return f(k) + (mid - k) * k - f(mid-k);
 }
  
 void solve(int tc = 0) {
@@ -74,61 +74,32 @@ void solve(int tc = 0) {
   
   if (k * k < x){
     cout << 2 * k - 1 << endl;
-  }else if (f(k) < x ){
+    return;
+  }
+  
+  // can't reach 2k-1
+  ull lo = 0;
+  ull hi = 2*k - 1; // hi no
+  
+  while(hi - lo > 1){
+    ull mid = lo + (hi - lo)/2;
     
-    ull residual = x - f(k);
-    ull lo = 1;
-    ull hi = k;
-    
-    //cout << residual << endl;
-    
-    while(lo < hi){
-      
-      // g(lo) >= x
-      // g(hi) < x
-      ull mid = (lo + hi + 1) / 2 ;
-      //cout << g(k, mid) << endl;
-      // cout << (g(k,mid) < residual) << endl;
-      // cout << (g(k,mid-1) >= residual) << endl;
-      
-      if(g(k,mid) < residual && g(k,mid-1) >= residual){
-        cout << k * 2 - mid + 1 << endl;
-        return;
-      }
-      
-      if(g(k,mid) >= residual){
-        lo = mid;
-      }else{
-        hi = mid;
-      }
+    ull sum;
+    if (mid <= k){
+      sum = f(mid);
+    }else{
+      sum = g(k, mid);
     }
-
     
-  }else{ // in the former
-    ull lo = 0;
-    ull hi = k;
-    
-    while(lo < hi){
-      // f(lo) < x
-      // f(hi) >= x
-      
-      ull mid = (lo + hi) / 2;
-      
-      if (f(mid) < x && f(mid+1) >= x){
-        cout << mid + 1 << endl;
-        return;
-      }
-      
-      if(f(mid) >= x ){
-        hi = mid;
-      }else{
-        lo = mid;
-      }
-      
-      
+    if (sum >= x ){
+      hi = mid;
+    }else{
+      lo = mid;
     }
     
   }
+  cout << hi << endl;
+  
   
 }
  

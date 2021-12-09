@@ -48,7 +48,9 @@ const lld pi = 3.14159265358979323846;
 // const ll mod = 998244353;
 // ll mod;
  
- 
+ int f(pair<ll,ll> a, pair<ll, ll> b){
+   return a.first > b.first;
+ }
  
 ll n, m, q, k, l, r, x, y, z;
 const ll template_array_size = 1e6 + 17928;
@@ -58,42 +60,38 @@ ll c[template_array_size];
 string s, t;
  
  
- 
 void solve(int tc = 0) {
-	ull a,b,x;
-  cin >> a >> b >> x;
+  cin >> n;
   
-  while(true){
-    
-    if(a == 0 || b == 0){
-      if (x == max(a,b)){
-        cout << "YES" << endl;
-        return;
-      }
-      break;
-    }
-    
-    if (x > max(a, b)){
-      break;
-    }
-    
-    if ( x >= min(a, b) ){
-      if ( (max(a,b) - x) % min(a,b) == 0){
-        cout << "YES" << endl;
-        return;
-      }
-    }
-    
-    // if with this a,b not yes, then replace the larger one by sth
-		if(a > b){
-			a = a % b;
-		}else{
-			b = b % a;
-		}
-
+  vector< pair<ll,ll> > mp;
+  
+  for (int i = 1; i <= n; ++i){
+    cin >> a[i];
+    mp.push_back(make_pair(a[i], i));
   }
   
-  cout << "NO" << endl;
+  sort(mp.begin(),mp.end(), f);
+  // for (auto it = mp.begin(); it != mp.end(); it++)
+  //   cout << it->first << " => " << it->second << endl;
+  
+  ll T = 0;
+  for (ll i = 0; i < n; ++i){
+    ll times = mp[i].first;
+    ll idx = mp[i].second;
+    ll loc = (i/2 + 1) * pow(-1, i);
+    b[ idx ] = loc;
+    T += 2 * times * (i/2 + 1);
+  }
+  
+  cout << T << endl;
+  
+  b[0] = 0;
+  for (int i = 0; i <= n; ++i){
+    cout << b[i] << " ";
+  }
+  cout << endl;
+
+
 }
  
 int main() {

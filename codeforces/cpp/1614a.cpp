@@ -49,7 +49,6 @@ const lld pi = 3.14159265358979323846;
 // ll mod;
  
  
- 
 ll n, m, q, k, l, r, x, y, z;
 const ll template_array_size = 1e6 + 17928;
 ll a[template_array_size];
@@ -58,42 +57,33 @@ ll c[template_array_size];
 string s, t;
  
  
- 
 void solve(int tc = 0) {
-	ull a,b,x;
-  cin >> a >> b >> x;
+  cin >> n >> l >> r >> k;
   
-  while(true){
-    
-    if(a == 0 || b == 0){
-      if (x == max(a,b)){
-        cout << "YES" << endl;
-        return;
-      }
-      break;
+  vll p;
+  
+  for (int i = 0; i < n; ++i){
+    ll cp;
+    cin >> cp;
+    if (cp >= l && cp <= r){
+      p.push_back(cp);
     }
-    
-    if (x > max(a, b)){
-      break;
-    }
-    
-    if ( x >= min(a, b) ){
-      if ( (max(a,b) - x) % min(a,b) == 0){
-        cout << "YES" << endl;
-        return;
-      }
-    }
-    
-    // if with this a,b not yes, then replace the larger one by sth
-		if(a > b){
-			a = a % b;
-		}else{
-			b = b % a;
-		}
-
   }
   
-  cout << "NO" << endl;
+  sort(p.begin(),p.end());
+  
+  int cnt = 0;
+  ll sum = 0;
+  for(int i = 0; i < p.size(); ++i){
+    if (sum + p[i] <= k){
+      sum += p[i];
+      cnt ++;
+    }else{
+      break;
+    }
+  }
+  
+  cout << cnt << endl;
 }
  
 int main() {
@@ -101,7 +91,7 @@ int main() {
 		auto begin = std::chrono::high_resolution_clock::now();
 	#endif
 	
-	send help
+	//send help
  
 	#ifndef leran_cai_local
 		// usaco("evacuation");

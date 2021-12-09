@@ -44,10 +44,9 @@ void usaco(string filename) {
 // using namespace atcoder;
  
 const lld pi = 3.14159265358979323846;
-// const ll mod = 1000000007;
+const ll mod = 1000000007;
 // const ll mod = 998244353;
 // ll mod;
- 
  
  
 ll n, m, q, k, l, r, x, y, z;
@@ -57,43 +56,33 @@ ll b[template_array_size];
 ll c[template_array_size];
 string s, t;
  
- 
+ ull fastpower(ull base, ull power){
+  ull result = 1;
+  while (power > 0){
+      // If power is even
+      if (power % 2 == 0){
+          // Divide the power by 2
+          power = power / 2;
+          // Multiply base to itself
+          base = base * base % mod;
+      }
+      else{
+          // Decrement the power by 1 and make it even
+          power = power - 1;
+          // Take care of the extra value that we took out
+          // We will store it directly in result
+          result = result * base % mod;
+
+          // Now power is even, so we can follow our previous procedure
+          power = power / 2;
+          base = base * base % mod;
+      }
+  }
+  return result;
+} 
  
 void solve(int tc = 0) {
-	ull a,b,x;
-  cin >> a >> b >> x;
   
-  while(true){
-    
-    if(a == 0 || b == 0){
-      if (x == max(a,b)){
-        cout << "YES" << endl;
-        return;
-      }
-      break;
-    }
-    
-    if (x > max(a, b)){
-      break;
-    }
-    
-    if ( x >= min(a, b) ){
-      if ( (max(a,b) - x) % min(a,b) == 0){
-        cout << "YES" << endl;
-        return;
-      }
-    }
-    
-    // if with this a,b not yes, then replace the larger one by sth
-		if(a > b){
-			a = a % b;
-		}else{
-			b = b % a;
-		}
-
-  }
-  
-  cout << "NO" << endl;
 }
  
 int main() {

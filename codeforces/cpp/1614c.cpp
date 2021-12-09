@@ -44,11 +44,35 @@ void usaco(string filename) {
 // using namespace atcoder;
  
 const lld pi = 3.14159265358979323846;
-// const ll mod = 1000000007;
+const ll mod = 1000000007;
 // const ll mod = 998244353;
 // ll mod;
  
- 
+
+ull fastpower(ull base, ull power){
+  ull result = 1;
+  while (power > 0){
+      // If power is even
+      if (power % 2 == 0){
+          // Divide the power by 2
+          power = power / 2;
+          // Multiply base to itself
+          base = base * base % mod;
+      }
+      else{
+          // Decrement the power by 1 and make it even
+          power = power - 1;
+          // Take care of the extra value that we took out
+          // We will store it directly in result
+          result = result * base % mod;
+
+          // Now power is even, so we can follow our previous procedure
+          power = power / 2;
+          base = base * base % mod;
+      }
+  }
+  return result;
+} 
  
 ll n, m, q, k, l, r, x, y, z;
 const ll template_array_size = 1e6 + 17928;
@@ -58,42 +82,20 @@ ll c[template_array_size];
 string s, t;
  
  
- 
 void solve(int tc = 0) {
-	ull a,b,x;
-  cin >> a >> b >> x;
+  cin >> n >> m;
   
-  while(true){
-    
-    if(a == 0 || b == 0){
-      if (x == max(a,b)){
-        cout << "YES" << endl;
-        return;
-      }
-      break;
-    }
-    
-    if (x > max(a, b)){
-      break;
-    }
-    
-    if ( x >= min(a, b) ){
-      if ( (max(a,b) - x) % min(a,b) == 0){
-        cout << "YES" << endl;
-        return;
-      }
-    }
-    
-    // if with this a,b not yes, then replace the larger one by sth
-		if(a > b){
-			a = a % b;
-		}else{
-			b = b % a;
-		}
-
+  ull sum = 0;
+  
+  for (int i = 0; i < m; ++i){
+    cin >> l >> r >> x;
+    sum = sum | x;
   }
   
-  cout << "NO" << endl;
+  ull ans = fastpower(2, n-1) * (sum % mod) % mod;
+  
+  
+  cout << ans << endl;
 }
  
 int main() {
