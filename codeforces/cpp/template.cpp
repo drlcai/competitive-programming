@@ -11,7 +11,7 @@ using namespace std;
 #define getunique(v) {sort(v.begin(), v.end()); v.erase(unique(v.begin(), v.end()), v.end());}
 #define watch(v) { for(int i = 0; i < v.size(); ++i){cout << v[i] << " "; }cout << endl; }
 #define watcharr(arr, n) {for(int i = 0; i < n; ++i){cout << arr[i] << " ";} cout << endl; }
-#define watchmap(table) {for(auto const& [key, value] : table){cout << key << " " << value << endl;} } 
+#define watchmap(mp) {for(auto const& [key, value] : mp){cout << key << "==>" << value << endl;} } 
 
 typedef long long ll;
 // typedef int ll;
