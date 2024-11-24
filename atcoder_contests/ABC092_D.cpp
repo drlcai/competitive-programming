@@ -13,57 +13,25 @@ using namespace atcoder;
 ////////////////////////////////////////////////////////////
 
 template <typename T>
-void print_vec(const std::vector<T> &vec, bool show_id = true)
+void print_vec(const std::vector<T> &vec)
 {
-  for (int i = 0; i < vec.size(); i++)
-  {
-    cout << i << "\t";
-  }
-  cout << "\n";
-
   for (const auto &elem : vec)
   {
-    cout << elem << "\t"; // Print each element followed by a space
+    std::cout << elem << " "; // Print each element followed by a space
   }
-  cout << '\n'; // Print a newline after printing all elements
+  std::cout << "\n"; // Print a newline after printing all elements
 }
 
 template <typename T>
-void print_vec_2d(const std::vector<std::vector<T>> &vec, bool show_id = true)
+void print_vec_2d(const std::vector<std::vector<T>> &vec)
 {
-
-  if (vec.size() == 0)
-  {
-    return;
-  }
-
-  long long m = vec.size();
-  long long n = vec[0].size();
-
-  if (show_id)
-  {
-    cout << " " << "\t";
-    for (int i = 0; i < n; i++)
-    {
-      cout << i << "\t";
-    }
-  }
-  cout << "\n";
-
-  long long row_id = 0;
   for (const auto &row : vec)
   {
-    if (show_id)
-    {
-      cout << row_id << "\t";
-      row_id++;
-    }
-
     for (const auto &elem : row)
     {
-      cout << elem << "\t"; // Print each element with a space
+      std::cout << elem << " "; // Print each element with a space
     }
-    cout << '\n'; // Newline after each row
+    std::cout << "\n"; // Newline after each row
   }
 }
 
@@ -117,69 +85,72 @@ long long nCk(long long n, long long k)
 }
 
 ////////////////////////////////////////////////////////////
-////////////////////   SOLUTION   //////////////////////////
 ////////////////////////////////////////////////////////////
 
 void solve()
 {
-  int n;
-  cin >> n;
-  vector<int> a(n);
-  for (int i = 0; i < n; i++)
+  int a, b;
+  cin >> a >> b;
+
+  int k = 50;
+
+  vector<vector<char>> table(k * 2, vector<char>(k * 2, '#'));
+
+  for (int i = k; i < 2 * k; i++)
   {
-    cin >> a[i];
+    fill(table[i].begin(), table[i].end(), '.');
   }
 
-  if (n < 2)
+
+  // change black to white
+  int wc = 1;
+  int bc = 1;
+
+  bool keepgoing = true;
+  for (int i = 0; i < k - 1; i+=2)
   {
-    cout << 0;
-    return;
-  }
-
-  int ml = 0;
-
-  int stt = 0;
-
-  map<int, int> last;
-
-  for (int i = 0; i < n; i++)
-  {
-    // if stt to i is even
-    if ((i - stt) % 2 == 1)
+    for (int j=0; j<2*k;j+=2)
     {
-      if (a[i] != a[i - 1])
+      if (wc == a)
       {
-        stt = i;
+        keepgoing = false;
+        break;
       }
-      else
-      {
-        ml = max(ml, i - stt + 1);
-      }
+      table[i][j] = '.';
+      wc++;
     }
-    // if stt to i is odd length
-    else
-    {
-      if (last[a[i]] > stt)
-      {
-        if (last[a[i]] == i-1)
-        {
-          stt = i-1;
-          ml = max(ml, 2);
-        }else{
-          stt = last[a[i]] + 1; // I got it wrong, it should be 1 after last[a[i]], I wrote i
-        }
-      }
-
-    }
-
-    last[a[i]] = i;
+    if (!keepgoing)
+      break;
   }
 
-  cout << ml;
+  // change white to black
+  keepgoing = true;
+  for (int i = k + 1; i < 2 * k; i+=2)
+  {
+    for (int j=0; j<2*k;j+=2)
+    {
+      if (bc == b)
+      {
+        keepgoing = false;
+        break;
+      }
+      table[i][j] = '#';
+      bc++;
+    }
+    if (!keepgoing)
+      break;
+  }
+
+  cout << 2*k << " " << 2*k <<"\n";
+  for (const auto &row : table)
+  {
+    for (const auto &elem : row)
+    {
+      std::cout << elem; // Print each element with a space
+    }
+    std::cout << "\n"; // Newline after each row
+  }
 }
-
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
 
 int main()
 {
