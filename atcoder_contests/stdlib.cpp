@@ -9,7 +9,7 @@ using namespace std;
 using namespace atcoder;
 
 ////////////////////////////////////////////////////////////
-// Display
+//////////////////   VISUALIZATION   ///////////////////////
 ////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -68,7 +68,7 @@ void print_vec_2d(const std::vector<std::vector<T>> &vec, bool show_id = true)
 }
 
 ////////////////////////////////////////////////////////////
-// Maths
+//////////////////////   MATHS   ///////////////////////////
 ////////////////////////////////////////////////////////////
 
 const long long MOD = 1e9 + 7;
@@ -96,12 +96,12 @@ long long mod_pow(long long x, long long y, long long mod)
 void precompute_factorials()
 {
   fact[0] = inv_fact[0] = 1;
-  for (int i = 1; i <= MAXN; ++i)
+  for (long long i = 1; i <= MAXN; ++i)
   {
     fact[i] = fact[i - 1] * i % MOD;
   }
   inv_fact[MAXN] = mod_pow(fact[MAXN], MOD - 2, MOD); // Fermat's Little Theorem for inverse
-  for (int i = MAXN - 1; i >= 1; --i)
+  for (long long i = MAXN - 1; i >= 1; --i)
   {
     inv_fact[i] = inv_fact[i + 1] * (i + 1) % MOD;
   }
@@ -117,12 +117,26 @@ long long nCk(long long n, long long k)
 }
 
 ////////////////////////////////////////////////////////////
+////////////////////   ALGORITHMS   ////////////////////////
+////////////////////////////////////////////////////////////
+
+/*
+The function returns the index of the first element in v that is greater than or equal to x.
+If no such element exists, it returns the index past the last element (i.e., the size of the vector).
+ */
+template <typename T>
+T bs(const vector<T> &v, T x)
+{
+  return lower_bound(begin(v), end(v), x) - begin(v);
+}
+
+////////////////////////////////////////////////////////////
 ////////////////////   SOLUTION   //////////////////////////
 ////////////////////////////////////////////////////////////
 
 void solve()
 {
-
+  
 }
 
 ////////////////////////////////////////////////////////////
